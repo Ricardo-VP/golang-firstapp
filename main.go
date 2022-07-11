@@ -1,25 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"rest-api/server"
 )
 
 func main() {
 
-	http.HandleFunc(("/"), func(w http.ResponseWriter, r *http.Request) {
-
-		if r.Method != http.MethodGet {
-			fmt.Fprintf(w, "Método no permitido")
-			return
-		}
-
-		fmt.Fprintf(w, "Hola %s", "visitante")
-	})
-
-	srv := http.Server{
-		Addr: ":8080",
-	}
+	srv := server.New(":8080")
 
 	err := srv.ListenAndServe()
 
